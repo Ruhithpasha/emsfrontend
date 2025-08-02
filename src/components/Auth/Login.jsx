@@ -7,6 +7,10 @@ const Login = React.memo(({LoginHandler}) => {
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
+  const handleEmailChange = useCallback((e) => {
+    setEmail(e.target.value)
+  }, [])
+
   const handlePasswordChange = useCallback((e) => {
     setPassword(e.target.value)
   }, [])
