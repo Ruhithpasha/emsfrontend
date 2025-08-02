@@ -235,19 +235,19 @@ const TaskManagement = ({ tasks, employees, onRefresh }) => {
   // Render Component
   // ===============================
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-white mb-2">Task Management</h2>
-          <p className="text-blue-200">Create, assign, and track tasks across your team</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Task Management</h2>
+          <p className="text-blue-200 text-sm sm:text-base">Create, assign, and track tasks across your team</p>
         </div>
         
         <button
           onClick={() => setIsCreateModalOpen(true)}
-          className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-lg transition-all duration-200 font-medium"
+          className="flex items-center space-x-2 px-3 sm:px-4 py-2 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-lg transition-all duration-200 font-medium text-sm sm:text-base"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
           </svg>
           <span>Create Task</span>
@@ -255,44 +255,44 @@ const TaskManagement = ({ tasks, employees, onRefresh }) => {
       </div>
 
       {/* Task Statistics */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 text-center">
-          <p className="text-2xl font-bold text-white">{taskStats.total}</p>
-          <p className="text-blue-200 text-sm">Total Tasks</p>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-3 sm:p-4 text-center">
+          <p className="text-lg sm:text-2xl font-bold text-white">{taskStats.total}</p>
+          <p className="text-blue-200 text-xs sm:text-sm">Total Tasks</p>
         </div>
-        <div className="bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 rounded-xl p-4 text-center">
-          <p className="text-2xl font-bold text-blue-400">{taskStats.newTasks}</p>
-          <p className="text-blue-200 text-sm">New Tasks</p>
+        <div className="bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 rounded-xl p-3 sm:p-4 text-center">
+          <p className="text-lg sm:text-2xl font-bold text-blue-400">{taskStats.newTasks}</p>
+          <p className="text-blue-200 text-xs sm:text-sm">New Tasks</p>
         </div>
-        <div className="bg-yellow-500/20 backdrop-blur-sm border border-yellow-400/30 rounded-xl p-4 text-center">
-          <p className="text-2xl font-bold text-yellow-400">{taskStats.active}</p>
-          <p className="text-blue-200 text-sm">Active</p>
+        <div className="bg-yellow-500/20 backdrop-blur-sm border border-yellow-400/30 rounded-xl p-3 sm:p-4 text-center">
+          <p className="text-lg sm:text-2xl font-bold text-yellow-400">{taskStats.active}</p>
+          <p className="text-blue-200 text-xs sm:text-sm">Active</p>
         </div>
-        <div className="bg-green-500/20 backdrop-blur-sm border border-green-400/30 rounded-xl p-4 text-center">
-          <p className="text-2xl font-bold text-green-400">{taskStats.completed}</p>
-          <p className="text-blue-200 text-sm">Completed</p>
+        <div className="bg-green-500/20 backdrop-blur-sm border border-green-400/30 rounded-xl p-3 sm:p-4 text-center">
+          <p className="text-lg sm:text-2xl font-bold text-green-400">{taskStats.completed}</p>
+          <p className="text-blue-200 text-xs sm:text-sm">Completed</p>
         </div>
-        <div className="bg-red-500/20 backdrop-blur-sm border border-red-400/30 rounded-xl p-4 text-center">
-          <p className="text-2xl font-bold text-red-400">{taskStats.failed}</p>
-          <p className="text-blue-200 text-sm">Failed</p>
+        <div className="bg-red-500/20 backdrop-blur-sm border border-red-400/30 rounded-xl p-3 sm:p-4 text-center">
+          <p className="text-lg sm:text-2xl font-bold text-red-400">{taskStats.failed}</p>
+          <p className="text-blue-200 text-xs sm:text-sm">Failed</p>
         </div>
       </div>
 
       {/* Filters and Search */}
-      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
+      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 sm:p-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
           {/* Search */}
-          <div className="lg:col-span-2">
-            <label className="block text-sm font-medium text-blue-200 mb-2">Search</label>
+          <div className="sm:col-span-2 lg:col-span-2 xl:col-span-2">
+            <label className="block text-xs sm:text-sm font-medium text-blue-200 mb-2">Search</label>
             <div className="relative">
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search tasks..."
-                className="w-full pl-10 pr-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full pl-8 sm:pl-10 pr-4 py-2 sm:py-2.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
               />
-              <svg className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="absolute left-2 sm:left-3 top-2 sm:top-2.5 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
@@ -300,14 +300,14 @@ const TaskManagement = ({ tasks, employees, onRefresh }) => {
 
           {/* Status Filter */}
           <div className="admin-dropdown">
-            <label className="block text-sm font-medium text-blue-200 mb-2">Status</label>
+            <label className="block text-xs sm:text-sm font-medium text-blue-200 mb-2">Status</label>
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 hover:bg-white/15 transition-all duration-200 backdrop-blur-sm appearance-none cursor-pointer shadow-lg hover:shadow-xl"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 hover:bg-white/15 transition-all duration-200 backdrop-blur-sm appearance-none cursor-pointer shadow-lg hover:shadow-xl text-sm sm:text-base"
               style={{
                 backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-                backgroundPosition: 'right 12px center',
+                backgroundPosition: 'right 8px center',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: '16px'
               }}
@@ -322,14 +322,14 @@ const TaskManagement = ({ tasks, employees, onRefresh }) => {
 
           {/* Priority Filter */}
           <div className="admin-dropdown">
-            <label className="block text-sm font-medium text-blue-200 mb-2">Priority</label>
+            <label className="block text-xs sm:text-sm font-medium text-blue-200 mb-2">Priority</label>
             <select
               value={filterPriority}
               onChange={(e) => setFilterPriority(e.target.value)}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 hover:bg-white/15 transition-all duration-200 backdrop-blur-sm appearance-none cursor-pointer shadow-lg hover:shadow-xl"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 hover:bg-white/15 transition-all duration-200 backdrop-blur-sm appearance-none cursor-pointer shadow-lg hover:shadow-xl text-sm sm:text-base"
               style={{
                 backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-                backgroundPosition: 'right 12px center',
+                backgroundPosition: 'right 8px center',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: '16px'
               }}
@@ -343,14 +343,14 @@ const TaskManagement = ({ tasks, employees, onRefresh }) => {
 
           {/* Assignee Filter */}
           <div className="admin-dropdown">
-            <label className="block text-sm font-medium text-blue-200 mb-2">Assignee</label>
+            <label className="block text-xs sm:text-sm font-medium text-blue-200 mb-2">Assignee</label>
             <select
               value={filterAssignee}
               onChange={(e) => setFilterAssignee(e.target.value)}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 hover:bg-white/15 transition-all duration-200 backdrop-blur-sm appearance-none cursor-pointer shadow-lg hover:shadow-xl"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 hover:bg-white/15 transition-all duration-200 backdrop-blur-sm appearance-none cursor-pointer shadow-lg hover:shadow-xl text-sm sm:text-base"
               style={{
                 backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-                backgroundPosition: 'right 12px center',
+                backgroundPosition: 'right 8px center',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: '16px'
               }}
@@ -367,15 +367,15 @@ const TaskManagement = ({ tasks, employees, onRefresh }) => {
 
           {/* Sort Options */}
           <div className="admin-dropdown">
-            <label className="block text-sm font-medium text-blue-200 mb-2">Sort</label>
+            <label className="block text-xs sm:text-sm font-medium text-blue-200 mb-2">Sort</label>
             <div className="flex space-x-2">
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 hover:bg-white/15 transition-all duration-200 backdrop-blur-sm appearance-none cursor-pointer shadow-lg hover:shadow-xl"
+                className="flex-1 px-3 sm:px-4 py-2 sm:py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 hover:bg-white/15 transition-all duration-200 backdrop-blur-sm appearance-none cursor-pointer shadow-lg hover:shadow-xl text-sm sm:text-base"
                 style={{
                   backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-                  backgroundPosition: 'right 12px center',
+                  backgroundPosition: 'right 8px center',
                   backgroundRepeat: 'no-repeat',
                   backgroundSize: '16px'
                 }}
@@ -387,10 +387,10 @@ const TaskManagement = ({ tasks, employees, onRefresh }) => {
               </select>
               <button
                 onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-                className="px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white hover:bg-white/20 transition-all duration-200"
+                className="px-2 sm:px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white hover:bg-white/20 transition-all duration-200"
                 title={`Sort ${sortOrder === 'asc' ? 'Descending' : 'Ascending'}`}
               >
-                <svg className={`w-4 h-4 transform ${sortOrder === 'desc' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className={`w-3 h-3 sm:w-4 sm:h-4 transform ${sortOrder === 'desc' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11l5-5m0 0l5 5m-5-5v12" />
                 </svg>
               </button>
