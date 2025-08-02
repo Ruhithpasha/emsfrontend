@@ -8,7 +8,6 @@ import ForgotPassword from './components/Auth/ForgotPassword'
 import ResetPassword from './components/Auth/ResetPassword'
 import AdminDashboard from './components/Dashbord/AdminDashboard'
 import EmployeeDashboard from './components/Dashbord/EmployeeDashboard'
-import ConfigTest from './components/debug/ConfigTest'
 
 // Protected Route Component
 const ProtectedRoute = ({ children, requiredRole }) => {
@@ -161,9 +160,6 @@ const App = () => {
           },
         }}
       />
-      
-      {/* Debug Configuration Test - Remove in production */}
-      <ConfigTest />
     </Router>
   )
 }

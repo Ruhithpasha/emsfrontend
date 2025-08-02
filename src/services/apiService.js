@@ -17,8 +17,6 @@ class ApiService {
 
   async request(endpoint, options = {}) {
     const url = `${config.API_BASE_URL}${endpoint}`;
-    console.log('API Request URL:', url); // Debug log
-    console.log('Config API_BASE_URL:', config.API_BASE_URL); // Debug log
     const config_options = {
       headers: {
         ...config.defaultHeaders,
