@@ -17,15 +17,13 @@ class ApiService {
 
   async request(endpoint, options = {}) {
     const url = `${config.API_BASE_URL}${endpoint}`;
-    console.log('🔗 API Request URL:', url);
-    console.log('🔧 Config API_BASE_URL:', config.API_BASE_URL);
-    console.log('📍 Endpoint:', endpoint);
+    
     const config_options = {
       headers: {
         ...config.defaultHeaders,
         ...options.headers,
       },
-      timeout: config.timeout,
+      // Remove timeout for faster requests
       ...options,
     };
 
@@ -50,7 +48,6 @@ class ApiService {
 
   // Auth endpoints
   async login(email, password) {
-    console.log('🔑 Login attempt with endpoint:', config.endpoints.auth.login);
     const response = await this.request(config.endpoints.auth.login, {
       method: 'POST',
       body: JSON.stringify({ email, password }),

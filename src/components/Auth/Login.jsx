@@ -11,15 +11,17 @@ const Login = ({LoginHandler}) => {
     e.preventDefault()
     setIsLoading(true)
     
-    // Simulate loading for better UX
-    setTimeout(() => {
+    try {
       console.log("Email is", email)
       console.log("password is", password)
-      LoginHandler(email, password)
+      await LoginHandler(email, password)
       setEmail("")
       setPassword("")
+    } catch (error) {
+      console.error('Login error:', error)
+    } finally {
       setIsLoading(false)
-    }, 1000)
+    }
   }
 
   return (
@@ -106,8 +108,8 @@ const Login = ({LoginHandler}) => {
             {/* Login Button */}
             <button
               type='submit'
-              disabled={isLoading}
-              className='w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed'
+              disabled={isLoading || !email.trim() || !password.trim()}
+              className='w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none'
             >
               {isLoading ? (
                 <div className='flex items-center justify-center'>

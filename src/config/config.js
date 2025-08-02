@@ -49,9 +49,6 @@ const config = {
     }
   },
   
-  // Request timeout (in milliseconds)
-  timeout: 10000,
-  
   // Default headers
   defaultHeaders: {
     'Content-Type': 'application/json',
