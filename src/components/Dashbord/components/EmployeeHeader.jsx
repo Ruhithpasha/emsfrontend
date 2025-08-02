@@ -75,27 +75,27 @@ const EmployeeHeader = ({ userData, onRefresh, onProfileToggle, loading }) => {
   // Render Component
   // ===============================
   return (
-    <div className="bg-white/10 backdrop-blur-sm border-b border-white/20 px-6 py-4">
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+    <div className="bg-white/10 backdrop-blur-sm border-b border-white/20 px-3 sm:px-6 py-3 sm:py-4">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 sm:gap-4">
         {/* Left Section - Greeting and Time */}
         <div className="flex-1">
           <div className="flex flex-col lg:flex-row lg:items-center lg:space-x-6">
             {/* Greeting */}
             <div>
-              <h1 className="text-2xl lg:text-3xl font-bold text-white">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">
                 {getGreeting()}, {userData?.firstName || 'Employee'}! 👋
               </h1>
-              <p className="text-blue-200 mt-1">
+              <p className="text-blue-200 mt-1 text-sm sm:text-base">
                 Welcome back to your dashboard
               </p>
             </div>
 
             {/* Time and Date */}
             <div className="mt-3 lg:mt-0 lg:text-right">
-              <div className="text-2xl font-mono font-bold text-cyan-300">
+              <div className="text-lg sm:text-2xl font-mono font-bold text-cyan-300">
                 {formatTime()}
               </div>
-              <div className="text-sm text-blue-200">
+              <div className="text-xs sm:text-sm text-blue-200">
                 {formatDate()}
               </div>
             </div>
@@ -103,7 +103,7 @@ const EmployeeHeader = ({ userData, onRefresh, onProfileToggle, loading }) => {
         </div>
 
         {/* Right Section - Actions */}
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-2 sm:space-x-3">
           {/* Refresh Button */}
           <button
             onClick={onRefresh}
@@ -114,7 +114,7 @@ const EmployeeHeader = ({ userData, onRefresh, onProfileToggle, loading }) => {
             title="Refresh Data"
           >
             <svg 
-              className={`w-5 h-5 text-blue-300 group-hover:text-white transition-colors ${
+              className={`w-4 h-4 sm:w-5 sm:h-5 text-blue-300 group-hover:text-white transition-colors ${
                 loading ? 'animate-spin' : ''
               }`} 
               fill="none" 
@@ -132,12 +132,12 @@ const EmployeeHeader = ({ userData, onRefresh, onProfileToggle, loading }) => {
 
           {/* User Avatar (Display Only) */}
           <div className="flex items-center space-x-2 p-2 bg-white/10 border border-white/20 rounded-lg">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-medium text-sm">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
+              <span className="text-white font-medium text-xs sm:text-sm">
                 {userData?.firstName?.charAt(0).toUpperCase() || 'E'}
               </span>
             </div>
-            <span className="hidden lg:block text-blue-300">
+            <span className="hidden lg:block text-blue-300 text-sm">
               {userData?.firstName || 'Employee'}
             </span>
           </div>
@@ -145,8 +145,8 @@ const EmployeeHeader = ({ userData, onRefresh, onProfileToggle, loading }) => {
       </div>
 
       {/* Status Bar */}
-      <div className="mt-4 flex items-center justify-between text-sm">
-        <div className="flex items-center space-x-4 text-blue-200">
+      <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs sm:text-sm space-y-2 sm:space-y-0">
+        <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 text-blue-200">
           <div className="flex items-center space-x-2">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
             <span>Online</span>
@@ -154,10 +154,10 @@ const EmployeeHeader = ({ userData, onRefresh, onProfileToggle, loading }) => {
           
           {userData?.email && (
             <div className="flex items-center space-x-2">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
               </svg>
-              <span>{userData.email}</span>
+              <span className="break-all">{userData.email}</span>
             </div>
           )}
         </div>

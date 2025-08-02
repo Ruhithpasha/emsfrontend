@@ -178,17 +178,17 @@ const EmployeeDashboard = ({ data, changeUser }) => {
   // Render Component  
   // ===============================
   return (
-    <div className="min-h-screen max-h-screen w-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 overflow-hidden">
-      {/* Background decoration */}
+    <div className="min-h-screen w-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+      {/* Background decoration - Responsive */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-5 animate-pulse"></div>
+        <div className="absolute -top-10 -right-10 sm:-top-20 sm:-right-20 lg:-top-40 lg:-right-40 w-20 h-20 sm:w-40 sm:h-40 lg:w-80 lg:h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
+        <div className="absolute -bottom-10 -left-10 sm:-bottom-20 sm:-left-20 lg:-bottom-40 lg:-left-40 w-20 h-20 sm:w-40 sm:h-40 lg:w-80 lg:h-80 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-48 sm:h-48 lg:w-96 lg:h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-5 animate-pulse"></div>
       </div>
 
-      <div className="relative z-10 flex h-screen max-h-screen">
+      <div className="relative z-10 flex flex-col lg:flex-row min-h-screen">
         {/* Main Content */}
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 flex flex-col min-h-screen lg:overflow-hidden">
           {/* Header */}
           <EmployeeHeader 
             userData={employeeData}
@@ -198,8 +198,8 @@ const EmployeeDashboard = ({ data, changeUser }) => {
           />
 
           {/* Navigation Tabs */}
-          <div className="px-4 lg:px-6 pt-4 lg:pt-6 pb-4">
-            <nav className="flex space-x-1 bg-white/10 backdrop-blur-sm rounded-lg p-1">
+          <div className="px-2 sm:px-4 lg:px-6 pt-2 sm:pt-4 lg:pt-6 pb-2 sm:pb-4">
+            <nav className="flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-1 bg-white/10 backdrop-blur-sm rounded-lg p-1">
               {[
                 { id: 'overview', label: '📊 Overview', icon: '📊' },
                 { id: 'tasks', label: '📋 My Tasks', icon: '📋' },
@@ -208,23 +208,24 @@ const EmployeeDashboard = ({ data, changeUser }) => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveView(tab.id)}
-                  className={`flex-1 flex items-center justify-center px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
+                  className={`flex-1 flex items-center justify-center px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium rounded-lg transition-all duration-200 ${
                     activeView === tab.id
                       ? 'bg-white text-blue-900 shadow-lg'
                       : 'text-white hover:bg-white/20'
                   }`}
                 >
-                  <span className="mr-2">{tab.icon}</span>
-                  {tab.label}
+                  <span className="mr-1 sm:mr-2 text-sm sm:text-base">{tab.icon}</span>
+                  <span className="hidden sm:inline">{tab.label}</span>
+                  <span className="sm:hidden">{tab.id.charAt(0).toUpperCase() + tab.id.slice(1)}</span>
                 </button>
               ))}
             </nav>
           </div>
 
           {/* Tab Content */}
-          <div className="flex-1 px-4 lg:px-6 pb-4 overflow-auto">
+          <div className="flex-1 px-2 sm:px-4 lg:px-6 pb-2 sm:pb-4 overflow-auto">
             {activeView === 'overview' && (
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {/* Task Overview */}
                 <TaskOverview 
                   taskCounts={employeeData.taskCounts}
@@ -232,12 +233,12 @@ const EmployeeDashboard = ({ data, changeUser }) => {
                 />
                 
                 {/* Recent Tasks Preview */}
-                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
-                  <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-xl font-bold text-white">Recent Tasks</h2>
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 sm:p-6">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 space-y-2 sm:space-y-0">
+                    <h2 className="text-lg sm:text-xl font-bold text-white">Recent Tasks</h2>
                     <button
                       onClick={() => setActiveView('tasks')}
-                      className="text-blue-300 hover:text-white transition-colors text-sm"
+                      className="text-blue-300 hover:text-white transition-colors text-sm self-start sm:self-auto"
                     >
                       View All →
                     </button>
@@ -296,8 +297,42 @@ const EmployeeDashboard = ({ data, changeUser }) => {
           </div>
         </div>
 
-        {/* Permanent Profile Panel - Hidden on mobile */}
-        <div className="hidden lg:block">
+        {/* Profile Panel - Mobile: Bottom sheet, Desktop: Sidebar */}
+        <div className="lg:hidden">
+          {/* Mobile Profile Toggle Button */}
+          <div className="fixed bottom-4 right-4 z-40">
+            <button
+              onClick={() => setActiveView('profile')}
+              className="w-12 h-12 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full flex items-center justify-center text-white shadow-lg"
+            >
+              👤
+            </button>
+          </div>
+          
+          {/* Mobile Profile Modal */}
+          {activeView === 'profile' && (
+            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-end lg:hidden">
+              <div className="w-full bg-white/10 backdrop-blur-lg border-t border-white/20 rounded-t-2xl p-4 max-h-[80vh] overflow-auto">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg font-bold text-white">Profile</h3>
+                  <button
+                    onClick={() => setActiveView('overview')}
+                    className="text-white/70 hover:text-white"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <ProfilePanel 
+                  userData={employeeData}
+                  onLogout={handleLogout}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Desktop Profile Panel */}
+        <div className="hidden lg:block lg:w-80 xl:w-96">
           <ProfilePanel 
             userData={employeeData}
             onLogout={handleLogout}

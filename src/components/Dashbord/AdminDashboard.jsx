@@ -131,13 +131,13 @@ const AdminDashboard = ({ changeUser }) => {
   // ===============================
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-      {/* Background decoration */}
+      {/* Background decoration - Responsive */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
+        <div className="absolute -top-10 -right-10 sm:-top-20 sm:-right-20 lg:-top-40 lg:-right-40 w-20 h-20 sm:w-40 sm:h-40 lg:w-80 lg:h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
+        <div className="absolute -bottom-10 -left-10 sm:-bottom-20 sm:-left-20 lg:-bottom-40 lg:-left-40 w-20 h-20 sm:w-40 sm:h-40 lg:w-80 lg:h-80 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
       </div>
 
-      <div className="relative z-10 p-4 lg:p-6 w-full">
+      <div className="relative z-10 p-2 sm:p-4 lg:p-6 w-full">
         {/* Dashboard Header */}
         <DashboardHeader 
           userData={userData}
@@ -146,8 +146,8 @@ const AdminDashboard = ({ changeUser }) => {
         />
 
         {/* Navigation Tabs */}
-        <div className="mb-6 lg:mb-8">
-          <nav className="flex space-x-1 bg-white/10 backdrop-blur-sm rounded-lg p-1">
+        <div className="mb-4 sm:mb-6 lg:mb-8">
+          <nav className="flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-1 bg-white/10 backdrop-blur-sm rounded-lg p-1">
             {[
               { id: 'overview', label: '📊 Overview', icon: '📊' },
               { id: 'employees', label: '👥 Employees', icon: '👥' },
@@ -156,21 +156,22 @@ const AdminDashboard = ({ changeUser }) => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex-1 flex items-center justify-center px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
+                className={`flex-1 flex items-center justify-center px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium rounded-lg transition-all duration-200 ${
                   activeTab === tab.id
                     ? 'bg-white text-blue-900 shadow-lg'
                     : 'text-white hover:bg-white/20'
                 }`}
               >
-                <span className="mr-2">{tab.icon}</span>
-                {tab.label}
+                <span className="mr-1 sm:mr-2 text-sm sm:text-base">{tab.icon}</span>
+                <span className="hidden sm:inline">{tab.label}</span>
+                <span className="sm:hidden">{tab.id.charAt(0).toUpperCase() + tab.id.slice(1)}</span>
               </button>
             ))}
           </nav>
         </div>
 
         {/* Tab Content */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {activeTab === 'overview' && (
             <>
               {/* Dashboard Statistics */}
