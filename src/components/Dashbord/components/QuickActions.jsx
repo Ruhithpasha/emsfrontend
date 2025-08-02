@@ -16,6 +16,7 @@
 import React, { useState } from 'react';
 import ReportsModal from './ReportsModal';
 import { toast } from 'react-hot-toast';
+import config from '../../../config/config.js';
 
 const QuickActions = ({ onRefresh, employees = [], onNavigate }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -71,7 +72,7 @@ const QuickActions = ({ onRefresh, employees = [], onNavigate }) => {
         break;
       case 'migrate':
         try {
-          const response = await fetch('http://localhost:5000/api/admin/migrate-tasks', {
+          const response = await fetch(`${config.API_BASE_URL}/api/admin/migrate-tasks`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -108,7 +109,7 @@ const QuickActions = ({ onRefresh, employees = [], onNavigate }) => {
   const handleTaskMigration = async () => {
     if (window.confirm('This will fix any tasks with conflicting statuses. Continue?')) {
       try {
-        const response = await fetch('http://localhost:5000/api/admin/migrate-tasks', {
+        const response = await fetch(`${config.API_BASE_URL}/api/admin/migrate-tasks`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('authToken')}`,

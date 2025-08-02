@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+import config from '../config/config.js';
 
 class ApiService {
   constructor() {
@@ -16,21 +16,24 @@ class ApiService {
   }
 
   async request(endpoint, options = {}) {
-    const url = `${API_BASE_URL}${endpoint}`;
-    const config = {
+    const url = `${config.API_BASE_URL}${endpoint}`;
+    console.log('API Request URL:', url); // Debug log
+    console.log('Config API_BASE_URL:', config.API_BASE_URL); // Debug log
+    const config_options = {
       headers: {
-        'Content-Type': 'application/json',
+        ...config.defaultHeaders,
         ...options.headers,
       },
+      timeout: config.timeout,
       ...options,
     };
 
     if (this.token) {
-      config.headers.Authorization = `Bearer ${this.token}`;
+      config_options.headers.Authorization = `Bearer ${this.token}`;
     }
 
     try {
-      const response = await fetch(url, config);
+      const response = await fetch(url, config_options);
       const data = await response.json();
 
       if (!response.ok) {
