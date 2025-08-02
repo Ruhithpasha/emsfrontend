@@ -47,7 +47,7 @@ class ApiService {
 
   // Auth endpoints
   async login(email, password) {
-    const response = await this.request('/auth/login', {
+    const response = await this.request(config.endpoints.auth.login, {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     });
@@ -60,14 +60,14 @@ class ApiService {
   }
 
   async register(userData) {
-    return this.request('/auth/register', {
+    return this.request(config.endpoints.auth.register, {
       method: 'POST',
       body: JSON.stringify(userData),
     });
   }
 
   async registerEmployee(userData) {
-    const response = await this.request('/auth/register/employee', {
+    const response = await this.request(config.endpoints.auth.register + '/employee', {
       method: 'POST',
       body: JSON.stringify(userData),
     });
@@ -80,7 +80,7 @@ class ApiService {
   }
 
   async registerAdmin(userData) {
-    const response = await this.request('/auth/register/admin', {
+    const response = await this.request(config.endpoints.auth.register + '/admin', {
       method: 'POST',
       body: JSON.stringify(userData),
     });
@@ -94,11 +94,11 @@ class ApiService {
 
   // Employee endpoints
   async getEmployeeProfile() {
-    return this.request('/employee/profile');
+    return this.request('/api/employee/profile');
   }
 
   async updateEmployeeTaskStatus(taskId, statusData) {
-    return this.request(`/employee/task/${taskId}`, {
+    return this.request(`/api/employee/task/${taskId}`, {
       method: 'PUT',
       body: JSON.stringify(statusData),
     });
@@ -106,46 +106,46 @@ class ApiService {
 
   // Admin endpoints
   async getAllEmployees() {
-    return this.request('/admin/employees');
+    return this.request('/api/admin/employees');
   }
 
   async createEmployee(employeeData) {
-    return this.request('/admin/employees', {
+    return this.request('/api/admin/employees', {
       method: 'POST',
       body: JSON.stringify(employeeData),
     });
   }
 
   async assignTask(employeeId, taskData) {
-    return this.request(`/admin/employees/${employeeId}/tasks`, {
+    return this.request(`/api/admin/employees/${employeeId}/tasks`, {
       method: 'POST',
       body: JSON.stringify(taskData),
     });
   }
 
   async deleteEmployee(employeeId) {
-    return this.request(`/admin/employees/${employeeId}`, {
+    return this.request(`/api/admin/employees/${employeeId}`, {
       method: 'DELETE',
     });
   }
 
   async getDashboardStats() {
-    return this.request('/admin/dashboard');
+    return this.request('/api/admin/dashboard');
   }
 
   async getAllTasks() {
-    return this.request('/admin/tasks');
+    return this.request('/api/admin/tasks');
   }
 
   async updateAdminTaskStatus(taskId, statusData) {
-    return this.request(`/admin/tasks/${taskId}`, {
+    return this.request(`/api/admin/tasks/${taskId}`, {
       method: 'PUT',
       body: JSON.stringify(statusData),
     });
   }
 
   async deleteTask(taskId) {
-    return this.request(`/admin/tasks/${taskId}`, {
+    return this.request(`/api/admin/tasks/${taskId}`, {
       method: 'DELETE',
     });
   }
@@ -159,7 +159,7 @@ class ApiService {
   async forgotPassword(email) {
     const requestData = { email };
     
-    return this.request('/auth/forgot-password', {
+    return this.request(config.endpoints.auth.forgotPassword, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -172,7 +172,7 @@ class ApiService {
   async resetPassword(token, newPassword) {
     const requestData = { token, newPassword };
     
-    return this.request('/auth/reset-password', {
+    return this.request(config.endpoints.auth.resetPassword, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
